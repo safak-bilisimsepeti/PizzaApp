@@ -1,0 +1,12 @@
+{
+  "language": 0,
+  "keys": [
+    "{\"key\": \"#test\", \"value\": \"UK TEST\"}",
+    "{\"key\": \"#spin\", \"value\": \"SPIN !!\"}",
+    "{\"key\": \"#claim\", \"value\": \"CLAIM REWARD!\"}",
+    "{\"key\": \"#completeslicestowin\", \"value\": \"C o m p l e t e   S l i c e s   t o   W i n\\nF R E E   M E D I U M   P I Z Z A\"}",
+    "{\"key\": \"#goal\", \"value\": \"GOOAL !!\"}",
+    "{\"key\": \"#startspin\", \"value\": \"Start Spin\"}",
+    "{\"key\": \"#stopspin\", \"value\": \"Stop Spin\"}"
+  ]
+}
