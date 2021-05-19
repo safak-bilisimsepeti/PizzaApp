@@ -40,8 +40,9 @@ public class GoalKeeper : MonoBehaviour
 
     IEnumerator Hold()
     {
-        float chance = 1.0f / ((int)Camera.main.GetComponent<PlayerController>().token.difficulty + 1);
-        bool hold = Random.Range(0.0f, chance) < 0.2f;
+        //float chance = 1.0f / ((int)Camera.main.GetComponent<PlayerController>().token.difficulty + 1);
+        //bool hold = Random.Range(0.0f, chance) < 0.2f;
+        bool hold = true;
         yield return new WaitForSeconds(hold ? 0.0f : 0.2f);
         string anim = (transform.position.x < ball.transform.position.x) ? "Right" : "Left";
         GetComponent<Animator>().SetBool(anim, true);

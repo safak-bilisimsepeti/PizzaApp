@@ -22,7 +22,8 @@ public class Core : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Application.targetFrameRate = 120;
+        Debug.Log(Language.Translate("#test"));
     }
 
     // Update is called once per frame

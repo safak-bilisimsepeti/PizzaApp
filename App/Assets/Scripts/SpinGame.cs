@@ -102,6 +102,7 @@ public class SpinGame : MonoBehaviour
     public void StartSpin()
     {
         speed = 6;
+        StopSpin();
     }
 
     public void StopSpin()

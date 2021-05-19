@@ -16,12 +16,12 @@ public static class Language
 {
     static Dictionary dictionary = new Dictionary();
 
-    public static Country GetCurrentLanguage()
+    public static SystemLanguage GetCurrentLanguage()
     {
         return dictionary.language;
     }
 
-    public static bool Init(Country language = Country.UK)
+    public static bool Init(SystemLanguage language = SystemLanguage.English)
     {
         TextAsset[] assets = Resources.LoadAll<TextAsset>("Languages");
 
@@ -31,6 +31,7 @@ public static class Language
             {
                 DictJson dict = JsonUtility.FromJson<DictJson>(asset.text);
                 dictionary.language = dict.language;
+                /*
                 List<DictionaryKey> keys = new List<DictionaryKey>();
                 foreach (string json in dict.keys)
                 {
@@ -38,6 +39,8 @@ public static class Language
                     keys.Add(key);
                 }
                 dictionary.keys = keys.ToArray();
+                */
+                dictionary.keys = dict.keys;
                 break;
             }
         }
@@ -71,16 +74,18 @@ public static class Language
 
 public class Dictionary
 {
-    public Country language = Country.UK;
+    public SystemLanguage language = SystemLanguage.English;
     public DictionaryKey[] keys = new DictionaryKey[0];
 }
 
+[System.Serializable]
 public class DictJson
 {
-    public Country language;
-    public string[] keys;
+    public SystemLanguage language;
+    public DictionaryKey[] keys;
 }
 
+[System.Serializable]
 public class DictionaryKey
 {
     public string key = "";
@@ -125,9 +130,10 @@ public class User
     public string name = "";
     public string surname = "";
     public string mail = "";
-    public string address = "";
     public string zipcode = "";
+    public string address = "";
     public Country country = Country.UK;
+    public SystemLanguage language = SystemLanguage.English;
     public string registerDate = "";
     public float ratingScore = 1.5f;
     public int freeSlices = 12;
@@ -138,6 +144,7 @@ public class User
         new GameData("Soccer"),
         new GameData("SoccerMP")
     };
+    public List<Order> orders = new List<Order>();
 
     public int CalculateStar(float score)
     {
@@ -168,6 +175,39 @@ public class User
 
         return 0;
     }
+}
+
+[System.Serializable]
+public class Order
+{
+    public long id = 0;
+    public bool active = true;
+    public string date = System.DateTime.Now.ToString();
+    public string address = "";
+    public List<Product> products = new List<Product>();
+}
+
+[System.Serializable]
+public class Product
+{
+    public string id = "";
+    public int quantity = 0;
+    public int price = 0;
+    public Currency currency = Currency.GBP;
+    public OrderType type = OrderType.Delivery;
+}
+
+public enum OrderType
+{
+    Delivery,
+    Collection
+}
+
+public enum Currency
+{
+    GBP,
+    EU,
+    USD
 }
 
 public enum Country
@@ -225,11 +265,6 @@ public class GameData
         lastUpdate = System.DateTime.Now.ToString();
         points = 0;
         team = null;
-    }
-
-    void SetTokens(GameToken[] GameTokens)
-    {
-        
     }
 
     public void GenerateTokens(GameToken[,] GameStat)
